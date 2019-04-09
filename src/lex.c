@@ -1262,9 +1262,11 @@ void insymbol (void)
 		  /* if exponent is zero: 10^ex = 1 -> num*1 = num 
 		     so just return singleval as it is. */
 		  if (ex != 0)
+#ifdef __AMIGA__
+            singleval = SPMul (SPPow (SPFlt (ex), 10.0), singleval);
+#else
 		    singleval = singleval * pow(10,ex);
-		    //singleval = SPMul (SPPow (SPFlt (ex), 10.0), singleval);
-
+#endif
 		  reclassify_number ();
 		}
 	      else
