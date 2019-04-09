@@ -48,7 +48,7 @@
 #include "acedef.h"
 
 /* globals */
-BOOL report_errors = TRUE; /* eg. see assem() in misc.c */
+extern BOOL report_errors = TRUE; /* eg. see assem() in misc.c */
 
 /* externals */
 extern ACELIBS acelib[NUMACELIBS], otherlib[NUMLIBS];
