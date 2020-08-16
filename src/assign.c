@@ -978,14 +978,14 @@ void get_data (void)
       else if (sym == singleconst)
 	{
 /*	  sprintf (fnumbuf, "%lx", SPMul (singleval, sign));    original */
-	  sprintf (fnumbuf, "%x", SPMul (singleval, sign));
+	  sprintf (fnumbuf, "%x", ffpfieee(singleval*sign) );
 	  make_data_const (fnumbuf);
 	}
       else if (sym == longconst)
 	{
-	  fnum = SPMul (SPFlt (longval), sign);
+	  fnum = longval* sign;
 /*	  sprintf (fnumbuf, "%lx", fnum);        original */
-	  sprintf (fnumbuf, "%x", fnum);
+	  sprintf (fnumbuf, "%x", ffpfieee(fnum));
 	  make_data_const (fnumbuf);
 	}
       else if (sym == shortconst)
@@ -993,7 +993,7 @@ void get_data (void)
 /*	  fnum = SPMul (SPFlt ((long) shortval), sign);*/
 	  fnum = ((float)shortval) * sign;
 /*	  sprintf (fnumbuf, "%lx", fnum);       original    */
-	  sprintf (fnumbuf, "%x", fnum);
+	  sprintf (fnumbuf, "%x", ffpfieee(fnum));
 	  make_data_const (fnumbuf);
 	}
       else

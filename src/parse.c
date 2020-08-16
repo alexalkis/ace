@@ -117,7 +117,11 @@ void parse (void)
 void show_title (void)
 {
   printf ("ACE Amiga BASIC Compiler version %s, copyright ", version ());
+#ifdef __linux__
+  printf("©");
+#else
   putchar (169);		/* copyright symbol */
+#endif
   puts (" 1991-1996 David Benn.");
 }
 

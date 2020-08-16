@@ -59,6 +59,7 @@ APTR AllocRemember(struct Remember ** RememberKey, ULONG Size, ULONG Flags)
 		head = malloc(sizeof(struct Remember));
 		head->alloc = (APTR) malloc(Size);
 		head->next = NULL;
+        return head->alloc;
 	} else {
 		for (cur = head; cur; cur = cur->next)
 			last = cur;
@@ -66,6 +67,7 @@ APTR AllocRemember(struct Remember ** RememberKey, ULONG Size, ULONG Flags)
 		last->next = add;
 		add->alloc = (APTR) malloc(Size);
 		add->next = NULL;
+        return add->alloc;
 	}
 }
 
@@ -73,14 +75,11 @@ void FreeRemember(struct Remember **RememberKey, BOOL ReallyForget)
 {
 	struct Remember *cur, *prev = NULL;
 
-	for (cur = *RememberKey; cur; cur = cur->next) {
-		if (prev)
-			free(prev);
+	for (cur = *RememberKey; cur; cur = prev->next) {
 		free(cur->alloc);
 		prev = cur;
+        free(cur);
 	}
-	if (prev)
-		free(prev);
 }
 
 void *alloc(ULONG bytes, ULONG flags)

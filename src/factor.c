@@ -154,7 +154,7 @@ int factor(void)
 
 	case singleconst:
 		/*      sprintf (numbuf, "#$%lx",singleval);    original */
-		sprintf(numbuf, "#$%x", singleval);
+		sprintf(numbuf, "#$%x", ffpfieee(singleval));
 		gen("move.l", numbuf, "-(sp)");
 		ftype = typ;
 		insymbol();

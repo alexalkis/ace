@@ -131,7 +131,7 @@ void get_event_trap_label(void)
 						break;
 					}
 					/* sprintf (ontimer_seconds, "#$%lx", timer_event_seconds); original */
-					sprintf(ontimer_seconds, "#$%x", timer_event_seconds);
+					sprintf(ontimer_seconds, "#$%x", ffpfieee(timer_event_seconds));
 					insymbol();
 					if (sym != rparen)
 						_error(9);

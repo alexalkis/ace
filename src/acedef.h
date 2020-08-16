@@ -57,6 +57,7 @@
 //#include <libraries/mathlibrary.h>
 //#include <libraries/dos.h>
 #include <stdio.h>
+#include <stdint.h>
 
 #ifdef __GNUC__
 /* Force compiling with builtin math for gcc */
@@ -437,7 +438,7 @@ enum {
 #define	MAXPARAMS     40	/* max # of subprogram parameters */
 #define	NEGATIVE      -1	/* a negative result from ACE lib check */
 #define	MAXCASES     1000	/* max # of cases in a CASE statement */
-#define	NUMACELIBS     7	/* # of shared libraries used by ACE */
+#define	NUMACELIBS     8	/* # of shared libraries used by ACE */
 #define	NUMLIBS	      40	/* max # of "other" shared libraries */
 #define	LF_CODE	       0	/* line feed code for PRINTS */
 #define	TAB_CODE       1	/* tab code for PRINTS */
@@ -861,3 +862,8 @@ long fsize(char *name);
 char *itoa(long n, char *buffer, int radix);
 char *ltoa(long n, char *buffer, int radix);
 char *strupr(char *string);
+
+
+/* ffpieee.c */
+uint32_t ffpfieee(float val);
+float ffptieee(const uint32_t val);

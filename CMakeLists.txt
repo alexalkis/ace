@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.13)
 project(ace C)
+add_subdirectory(acecc)
 
 set(CMAKE_C_STANDARD 11)
 
@@ -41,6 +42,10 @@ add_executable(ace
         src/symvar.h
         src/ver.c
         src/warns.c
-        src/window.c)
+        src/window.c
+        src/ffpieee.c
+        )
 
 target_link_libraries(ace m)
+
+
