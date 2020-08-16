@@ -82,9 +82,9 @@ BYTE check_for_ace_lib(char *libname) {
    ** If libname is a library used by ACE 
    ** open & close it in the normal way.
  */
-    printf("libname=%s\n",libname);
+    //printf("libname=%s\n",libname);
     while (acelib[c].name[0] != '\0' && strcmp(acelib[c].name, "SENTINEL") != 0) {
-        printf("Checking against %s\n", acelib[c].name);
+        //printf("Checking against %s\n", acelib[c].name);
         if (strcasecmp(acelib[c].name, libname) == 0) {
             enter_XREF(acelib[c].base);
             return (c);
@@ -153,19 +153,20 @@ void make_bmap_name(char *libname) {
     char lowCase[128];
     char *path;
 
-    path = "/home/alex/dev/ace/bmaps/";
-    /// TODO: uncomment this
-//  path=getenv("ACEbmaps");
-//  if (!path) {
-//    fprintf(stderr,"\n\n\nPlease define ACEbmaps to show the path where ACE's bmaps are...\n"
-//    		"(i.e. export ACEbmaps=\"/boo/foo/bmaps/\" No need to escape spaces)\n"
-//    );
-//    exit(20);
-//  }
+    //path = "/home/alex/dev/ace/bmaps/";
+
+  path=getenv("ACE_Basic");
+  if (!path) {
+    fprintf(stderr,"\n\n\nPlease define ACE_Basic to show the path where ACE's bmaps are...\n"
+    		"(i.e. export ACE_Basic=\"/boo/foo/\" No need to escape spaces)\n"
+    );
+    exit(20);
+  }
     char *d = lowCase;
     char *s = libname;
-    while (*d++ = tolower(*s++)) {}
+    while ((*d++ = tolower(*s++))) {}
     strcpy(bmapname, path);
+    strcat(bmapname,"bmaps/");
     strcat(bmapname, lowCase);
     strcat(bmapname, ".bmap");
 }

@@ -31,8 +31,17 @@ int main(int argc, char **argv)
     std::string compiler = std::string(COMPILER) + " " + compline;
     std::string assembler = std::string(ASSEMBLER) + "  -Fhunk -o " + basename + ".o " + basename +".s";
 
-    std::string libpath = "/home/alex/dev/ace/lib/"; /// getenv("ACElib");
-
+    char *lp = getenv("ACE_Basic");
+    std::string libpath;
+    if (lp) {
+        libpath = lp;
+        libpath+= "lib/";
+    } else {
+        fprintf(stderr,"\n\n\nPlease define ACE_Basic to show the path where ACE's bmaps are...\n"
+                       "(i.e. export ACE_Basic=\"/boo/foo/\" No need to escape spaces)\n"
+        );
+        return 20;
+    }
     if (libpath.empty()) {
         fprintf(stderr,"Please define ACElib to show the path where ACE's lib folder is...\n(i.e. export ACElib=/foo/boo/)\n");
         exit(20);
