@@ -1,5 +1,6 @@
 #include "acedef.h"
 #include <string.h>
+#include <stdlib.h>
 //#include <clib/dos_protos.h>
 //#include <clib/intuition_protos.h>
 
@@ -473,8 +474,13 @@ void compile(char *source_name, char *dest_name) {
 
     /* make icon? */
     if (make_icon && !early_exit) {
-        if ((icon_src = fopen("ACE:icons/exe.info", "r")) == NULL)
-            puts("can't open ACE:icons/exe.info for reading.");
+        char ipath[256];
+        char *b = getenv("ACE_Basic");
+        if (b) {
+            sprintf(ipath, "%sicons/exe.info", b);
+        }
+        if (b && (icon_src = fopen(ipath, "r")) == NULL)
+            fprintf(stderr, "error: can't open \"%s\" for reading.\n", ipath);
         else {
             cc = 0;
             while (source_name[cc] != '.')
