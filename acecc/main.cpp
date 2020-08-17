@@ -2,7 +2,7 @@
 #include <string>
 #include <stdlib.h>
 
-#define COMPILER        "./ace"
+#define COMPILER        "ace"
 #define ASSEMBLER       "vasmm68k_mot"
 #define LINKER          "vlink"
 
