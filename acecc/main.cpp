@@ -12,7 +12,7 @@ int main(int argc, char **argv)
     std::string compline;
 
     if (argc<2) {
-        fprintf(stderr, "Usage: %s [-O] file.b\n",argv[0]);
+        std::cerr << "Usage: " << argv[0] << " [-O] file.b\n";
         return 0;
     }
     compline="";
@@ -23,7 +23,7 @@ int main(int argc, char **argv)
     std::string filename=argv[argc-1];
     size_t dot = filename.rfind('.');
     if (dot==std::string::npos) {
-        fprintf(stderr, "%s error: Filename should end in .b[as]\n",argv[0]);
+        std::cerr << argv[0] << " error: Filename should end in .b[as]\n";
         return 10;
     }
     std::string ext = filename.substr(dot);
@@ -37,14 +37,9 @@ int main(int argc, char **argv)
         libpath = lp;
         libpath+= "lib/";
     } else {
-        fprintf(stderr,"\n\n\nPlease define ACE_Basic to show the path where ACE's bmaps are...\n"
-                       "(i.e. export ACE_Basic=\"/boo/foo/\" No need to escape spaces)\n"
-        );
+        std::cerr << "\n\n\nPlease define ACE_Basic to show the path where ACE's bmaps are...\n"
+                     "(i.e. export ACE_Basic=\"/boo/foo/\" No need to escape spaces)\n";
         return 20;
-    }
-    if (libpath.empty()) {
-        fprintf(stderr,"Please define ACElib to show the path where ACE's lib folder is...\n(i.e. export ACElib=/foo/boo/)\n");
-        exit(20);
     }
     std::string linker = std::string(LINKER) +" -bamigahunk -o "+basename+ " " + basename+".o "
             + libpath + "ami.lib " + libpath + "db.lib " + libpath + "startup.lib";
@@ -55,14 +50,21 @@ int main(int argc, char **argv)
 
 
     int rc=system(compiler.c_str());
-    if (rc!=0) return rc;
+    if (rc!=0) {
+        std::cerr << "Compiler returned " << rc << "\n";
+        return rc;
+    }
 
     rc = system(assembler.c_str());
-    printf("assembler rc=%d\n",rc);
-    if (rc!=0) return rc;
+    if (rc!=0) {
+        std::cerr << "Assembler returned " << rc << "\n";
+        return rc;
+    }
 
     rc = system(linker.c_str());
-
-    printf("linker rc=%d\n",rc);
+    if (rc!=0) {
+        std::cerr << "Linker returned " << rc << "\n";
+        return rc;
+    }
     return rc;
 }

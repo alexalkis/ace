@@ -163,7 +163,7 @@ BOOL ontimerused = FALSE;
 
 /* compiler option flags */
 BOOL break_opt = FALSE;		/* ctrl-c trapping */
-
+BOOL debug_msg = FALSE;
 BOOL optimise_opt = FALSE;	/* peephole optimisation */
 
 BOOL make_icon = FALSE;		/* make icon for executable */

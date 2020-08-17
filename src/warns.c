@@ -38,6 +38,7 @@ extern BOOL basdatapresent;
 extern BOOL readpresent;
 extern BOOL make_icon;
 extern BOOL end_of_source;
+extern BOOL debug_msg;
 
 /* locals */
 static char *frame_ptr[] = {"(a4)", "(a5)"};
@@ -149,7 +150,8 @@ BOOL search_func(char *bmap, char *func, SYM *declared_func) {
         declared_func->reg[rc++] = ch;
 
     declared_func->no_of_params = rc; /* record no. of parameters */
-    fprintf(stderr, "%s has offset %d Params: %d\n", func, offset, rc);
+    if (debug_msg)
+        fprintf(stderr, "%s has offset %d Params: %d\n", func, offset, rc);
     if (ch != '\0')
         return (FALSE); /* last character should be NULL */
 

@@ -75,6 +75,7 @@ extern BOOL early_exit;
 extern int exitvalue;
 extern char *rword[];
 extern BOOL break_opt;
+extern BOOL debug_msg;
 extern BOOL optimise_opt;
 extern BOOL make_icon;
 extern BOOL error_log;
@@ -167,6 +168,8 @@ BOOL check_options (char *opt)
 	  module_opt = TRUE;
 	else if (*opt == 'w')
 	  wdw_close_opt = TRUE;
+	else if (*opt == 'd')
+	    debug_msg = TRUE;
 	else
 	  legalopt = FALSE;
 	opt++;
